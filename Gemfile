@@ -10,11 +10,14 @@ gem 'bcrypt',         '3.1.13'
 
 gem 'bootstrap-sass', '3.4.1'
 
+gem 'bootstrap', '4.3.0'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+# gem "sqlite3", "~> 1.4"
+gem 'mysql2'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 6.0"
