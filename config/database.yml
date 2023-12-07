@@ -10,7 +10,8 @@ default: &default
   pool: 5
   username: root
   password: huy@123456
-  port: 3308
+  port: 3306
+  host: localhost
 
 development:
   <<: *default

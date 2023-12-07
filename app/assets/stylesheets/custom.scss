@@ -1,6 +1,7 @@
 @import "bootstrap-sprockets"; 
 @import "bootstrap";
 
+
 $gray-medium-light: #eaeaea;
 
 @mixin box_sizing { 
@@ -67,6 +68,11 @@ p{
 
 $gray-medium-light: #eaeaea;
 
+.show:hover{
+    .menu{
+        display: block !important;
+    }
+}
 
 @mixin box_sizing { 
     -moz-box-sizing: border-box; 
@@ -203,3 +209,15 @@ input {
     }
 }
 
+.checkbox {
+    margin-top: -10px; 
+    margin-bottom: 10px; 
+    span {
+        margin-left: 20px;
+        font-weight: normal; 
+    }
+}
+#session_remember_me { 
+    width: auto; 
+    margin-left: 0;
+}

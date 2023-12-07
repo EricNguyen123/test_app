@@ -12,6 +12,8 @@ gem 'bootstrap-sass', '3.4.1'
 
 gem 'bootstrap', '4.3.0'
 
+gem 'esbuild-rails'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
@@ -90,3 +92,5 @@ group :production do
   gem "pg", "1.3.5"
 end
 
+
+gem "jsbundling-rails", "~> 1.2"

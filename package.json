@@ -1,6 +1,7 @@
 {
-  "dependencies": {
-    "bootstrap": "^3.4.1",
-    "jquery": "^3.4.1"
+  "name": "myapp",
+  "private": "true",
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds"
   }
 }
