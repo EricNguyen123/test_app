@@ -8,6 +8,12 @@ gem "rails", "~> 7.1.2"
 
 gem 'bcrypt',         '3.1.13'
 
+gem 'faker'
+
+gem 'will_paginate', '~> 3.1', '>= 3.1.6'
+
+gem 'bootstrap-will_paginate', '~> 1.0'
+
 gem 'bootstrap-sass', '3.4.1'
 
 gem 'bootstrap', '4.3.0'

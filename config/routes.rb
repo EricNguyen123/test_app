@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   
+  get '/settings', to: 'users#edit'
 
   resources :users
 end
