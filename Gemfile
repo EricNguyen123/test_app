@@ -20,6 +20,13 @@ gem 'bootstrap', '4.3.0'
 
 gem 'esbuild-rails'
 
+gem 'active_storage_validations', '~> 1.1', '>= 1.1.3'
+
+gem 'image_processing', '~> 1.12', '>= 1.12.2'
+
+
+gem 'mini_magick', '~> 4.5', '>= 4.5.1'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
@@ -96,6 +103,7 @@ end
 
 group :production do
   gem "pg", "1.3.5"
+  gem 'aws-sdk-s3', '~> 1.141'
 end
 
 
