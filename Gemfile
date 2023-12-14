@@ -108,3 +108,7 @@ end
 
 
 gem "jsbundling-rails", "~> 1.2"
+
+gem 'devise', '~> 4.9', '>= 4.9.2'
+
+gem 'pry-rails', :group => :development

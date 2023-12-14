@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+    
     has_many :microposts, dependent: :destroy
     has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
     has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
@@ -31,8 +34,8 @@ class User < ApplicationRecord
 
     def authenticated?(attribute, token)
         digest = send("#{attribute}_digest")
-        return false if remember_digest.nil?
-        BCrypt::Password.new(remember_digest).is_password?(remember_token)
+        return false if digest.nil?
+        BCrypt::Password.new(digest).is_password?(token)
     end
 
     def forget 
@@ -63,7 +66,7 @@ class User < ApplicationRecord
     end
         
     def feed
-        Micropost.where("user_id = ?", id) 
+        Micropost.where("user_id IN (:following_ids) OR user_id = :user_id", following_ids: following_ids, user_id: id)
     end
         
     def follow(other_user) 
@@ -84,8 +87,8 @@ class User < ApplicationRecord
             self.email = email.downcase
         end
         # Creates and assigns the activation token and digest.
-        def create_activation_digest
-            self.activation_token = User.new_token 
-            self.activation_digest = User.digest(activation_token)
+        def create_activation_digest   
+            self.activation_token = User.new_token          
+            self.activation_digest = User.digest(activation_token) 
         end
 end

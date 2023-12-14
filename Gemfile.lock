@@ -136,6 +136,12 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    devise (4.9.3)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
     drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
@@ -226,11 +232,14 @@ GEM
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    orm_adapter (0.5.0)
     pg (1.3.5)
     popper_js (1.16.1)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
     psych (5.1.1.1)
       stringio
     public_suffix (5.0.4)
@@ -287,6 +296,9 @@ GEM
     regexp_parser (2.8.3)
     reline (0.4.1)
       io-console (~> 0.5)
+    responders (3.1.1)
+      actionpack (>= 5.2)
+      railties (>= 5.2)
     rexml (3.2.6)
     ruby-progressbar (1.13.0)
     ruby-vips (2.2.0)
@@ -330,6 +342,8 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -365,6 +379,7 @@ DEPENDENCIES
   byebug (= 11.0.1)
   capybara (= 3.37.1)
   debug
+  devise (~> 4.9, >= 4.9.2)
   esbuild-rails
   faker
   guard (= 2.18.0)
@@ -379,6 +394,7 @@ DEPENDENCIES
   minitest-reporters (= 1.5.0)
   mysql2
   pg (= 1.3.5)
+  pry-rails
   puma (~> 6.0)
   rails (~> 7.1.2)
   rails-controller-testing (= 1.0.5)
