@@ -1,15 +1,12 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-    
+    attr_accessor :remember_token, :activation_token, :reset_token 
+    before_save :downcase_email
+    before_create :create_activation_digest
     has_many :microposts, dependent: :destroy
     has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
     has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
     has_many :following, through: :active_relationships, source: :followed
     has_many :followers, through: :passive_relationships, source: :follower
-    attr_accessor :remember_token, :activation_token, :activation_digest, :reset_token 
-    before_save :downcase_email
-    before_create :create_activation_digest
     validates :name, presence: true, length: { maximum: 50 } 
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
@@ -35,7 +32,7 @@ class User < ApplicationRecord
     def authenticated?(attribute, token)
         digest = send("#{attribute}_digest")
         return false if digest.nil?
-        BCrypt::Password.new(digest).is_password?(token)
+        BCrypt::Password.new(digest).is_password?(token) 
     end
 
     def forget 
@@ -48,13 +45,14 @@ class User < ApplicationRecord
     end
 
     def send_activation_email 
+        
         UserMailer.account_activation(self).deliver_now
+        
     end
 
     def create_reset_digest
         self.reset_token = User.new_token 
         update_attribute(:reset_digest, User.digest(reset_token)) 
-        
     end
 
     def send_password_reset_email 
@@ -87,8 +85,8 @@ class User < ApplicationRecord
             self.email = email.downcase
         end
         # Creates and assigns the activation token and digest.
-        def create_activation_digest   
-            self.activation_token = User.new_token          
-            self.activation_digest = User.digest(activation_token) 
+        def create_activation_digest
+            self.activation_token  = User.new_token
+            self.activation_digest = User.digest(activation_token)
         end
 end
