@@ -12,7 +12,12 @@ class User < ApplicationRecord
     validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-    
+    devise :omniauthable, :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, omniauth_providers: [:google_oauth2]
+
+
+
+
     class << self
         def digest(string)
             cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
@@ -77,6 +82,19 @@ class User < ApplicationRecord
     # Returns true if the current user is following the other user.
     def following?(other_user) 
         following.include?(other_user)
+    end
+
+    def self.from_omniauth(auth)
+        where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+          user.email = auth.info.email
+          user.password = Devise.friendly_token[0, 20]
+          user.name = auth.info.name # assuming the user model has a name
+        #   user.avatar_url = auth.info.image # assuming the user model has an image
+        end
+    end
+
+    def valid_password_digest?(user, password)
+        user.authenticate(password)
     end
 
     private
