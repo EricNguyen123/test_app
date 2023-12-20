@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   
+  get '/auth/github/callback', to: 'sessions#gitauth'
   get '/auth/:provider/callback', to: 'sessions#omniauth'
 
   get '/settings', to: 'users#edit'
