@@ -26,4 +26,19 @@ class SessionsController < ApplicationController
     log_out if logged_in?
     redirect_to root_url
   end
+
+  def omniauth
+    user = User.find_or_create_by(uid: request.env['omniauth.auth'][:provider] , provider: request.env['omniauth.auth'][:uid]) do |user|
+      user.name = request.env['omniauth.auth'][:info][:first_name]
+      user.email = request.env['omniauth.auth'][:info][:email]
+      user.password = SecureRandom.urlsafe_base64
+    end
+    if user.valid?
+      user.send_activation_email
+      log_in user
+      redirect_to root_url
+    else
+      redirect_to login_path
+    end
+  end
 end
