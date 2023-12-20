@@ -111,4 +111,13 @@ gem 'devise', '~> 4.9', '>= 4.9.2'
 
 gem 'pry-rails', group: :development
 
+<<<<<<< HEAD
 gem 'jquery-rails'
+=======
+gem "jquery-rails"
+
+gem 'dotenv-rails'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+>>>>>>> 34304b3 (login with google [DEV])

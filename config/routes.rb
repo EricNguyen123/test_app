@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
-  devise_for :users
+ 
   get 'password_resets/new'
   get 'password_resets/edit'
   get 'sessions/new'
@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
   delete '/logout',  to: 'sessions#destroy'
   get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
+  post   '/login',   to: 'sessions#create'
+  
+  get '/auth/:provider/callback', to: 'sessions#omniauth'
 
   get '/settings', to: 'users#edit'
   resources :users do
