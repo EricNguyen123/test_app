@@ -30,6 +30,7 @@ RSpec.describe SessionsController, type: :controller do
       "provider" => "google_oauth2",
       "uid" => "111111111111111111",
       "info" => {
+        "nick_name" => "John Smith",
         "name" => "John Smith",
         "email" => "john@example.com",
         "first_name" => "John",
