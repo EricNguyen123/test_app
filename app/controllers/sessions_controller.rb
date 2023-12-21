@@ -28,7 +28,6 @@ class SessionsController < ApplicationController
   end
 
   def gitauth
-    
     user = User.find_or_create_by(provider: request.env['omniauth.auth'][:info][:nickname],uid: request.env['omniauth.auth'][:uid])
     user.name = request.env['omniauth.auth'][:info][:nickname]
     user.email = request.env['omniauth.auth'][:info][:nickname] + '@gmail.com'
@@ -47,6 +46,22 @@ class SessionsController < ApplicationController
       user.name = request.env['omniauth.auth'][:info][:first_name]
       user.email = request.env['omniauth.auth'][:info][:email]
       user.password = SecureRandom.urlsafe_base64
+    end
+    if user.valid?
+      user.send_activation_email
+      log_in user
+      redirect_to root_url
+    else
+      redirect_to login_path
+    end
+  end
+
+  def facebookauth
+    user = User.find_or_create_by(uid: request.env['omniauth.auth'][:provider] , provider: request.env['omniauth.auth'][:uid]) do |user|
+      user.name = request.env['omniauth.auth'][:info][:name]
+      user.email = request.env['omniauth.auth'][:info][:email]
+      user.password = SecureRandom.urlsafe_base64
+      
     end
     if user.valid?
       user.send_activation_email
