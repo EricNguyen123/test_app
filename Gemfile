@@ -121,8 +121,13 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 34304b3 (login with google [DEV])
 =======
 
 gem 'omniauth-github', '~> 2.0.0'
 >>>>>>> 53e805c (login with github)
+=======
+gem 'omniauth-github', '~> 2.0.0'
+gem 'omniauth-facebook'
+>>>>>>> b9f8dbb (login with facebook[DEV])
