@@ -32,7 +32,9 @@ class SessionsController < ApplicationController
     user.email = request.env['omniauth.auth'][:info][:nickname] + '@gmail.com'
     user.password = SecureRandom.urlsafe_base64
     if user.save
-      user.send_activation_email
+      if !user.activated?
+        user.activate
+      end
       log_in user
       redirect_to root_url
     else
@@ -41,13 +43,15 @@ class SessionsController < ApplicationController
   end
 
   def omniauth
-    user = User.find_or_create_by(uid: request.env['omniauth.auth'][:provider] , provider: request.env['omniauth.auth'][:uid]) do |user|
+    user = User.find_or_create_by(uid: request.env['omniauth.auth'][:uid] , provider: request.env['omniauth.auth'][:provider]) do |user|
       user.name = request.env['omniauth.auth'][:info][:first_name]
       user.email = request.env['omniauth.auth'][:info][:email]
       user.password = SecureRandom.urlsafe_base64
     end
     if user.valid?
-      user.send_activation_email
+      if !user.activated?
+        user.activate
+      end
       log_in user
       redirect_to root_url
     else
@@ -56,14 +60,15 @@ class SessionsController < ApplicationController
   end
 
   def facebookauth
-    user = User.find_or_create_by(uid: request.env['omniauth.auth'][:provider] , provider: request.env['omniauth.auth'][:uid]) do |user|
+    user = User.find_or_create_by(uid: request.env['omniauth.auth'][:uid] , provider: request.env['omniauth.auth'][:provider]) do |user|
       user.name = request.env['omniauth.auth'][:info][:name]
       user.email = request.env['omniauth.auth'][:info][:email]
       user.password = SecureRandom.urlsafe_base64
-      
     end
     if user.valid?
-      user.send_activation_email
+      if !user.activated?
+        user.activate
+      end
       log_in user
       redirect_to root_url
     else
