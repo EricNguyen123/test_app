@@ -27,8 +27,8 @@ class SessionsController < ApplicationController
   end
 
   def omniauth
-    user = User.find_or_create_by(uid: request.env['omniauth.auth'][:uid], 
-                                      provider: request.env['omniauth.auth'][:provider]) do |user|
+    user = User.find_or_create_by(uid: request.env['omniauth.auth'][:uid],
+                                  provider: request.env['omniauth.auth'][:provider]) do |user|
       user.name = request.env['omniauth.auth'][:info][:name]
       user.email = request.env['omniauth.auth'][:info][:email]
       user.name = request.env['omniauth.auth'][:info][:nickname] if user.name.nil?
@@ -44,4 +44,3 @@ class SessionsController < ApplicationController
     end
   end
 end
-
