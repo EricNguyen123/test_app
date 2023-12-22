@@ -6,6 +6,7 @@ RSpec.describe User, type: :model do
     expect(user).to be_valid
   end
 end
+
 RSpec.describe SessionsController, type: :controller do
   it 'should have a valid factory' do
     user = create(:user)
