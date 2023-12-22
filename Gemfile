@@ -71,8 +71,9 @@ gem 'sassc-rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'byebug', '11.0.1', platforms: %i[mri mingw x64_mingw]
-  gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'byebug', '11.0.1', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -96,8 +97,9 @@ group :test do
   gem 'minitest',                 '5.15.0'
   gem 'minitest-reporters',       '1.5.0'
   gem 'rails-controller-testing', '1.0.5'
-  gem 'selenium-webdriver',       '4.2.0'
-  gem 'webdrivers',               '5.0.0'
+  gem 'rspec-rails'
+  gem 'selenium-webdriver', '4.2.0'
+  gem 'webdrivers', '5.0.0'
 end
 
 group :production do
@@ -112,3 +114,12 @@ gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'pry-rails', group: :development
 
 gem 'jquery-rails'
+
+gem 'dotenv-rails'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-github', '~> 2.0.0'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
+
+gem 'rubocop', require: false
