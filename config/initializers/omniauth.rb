@@ -3,4 +3,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
   provider :facebook, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']
 end
+
 OmniAuth.config.allowed_request_methods = %i[get]
